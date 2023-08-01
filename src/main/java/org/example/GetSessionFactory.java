@@ -1,8 +1,6 @@
 package org.example;
 
-import org.example.entityH.Address;
-import org.example.entityH.Laptop;
-import org.example.entityH.Student;
+import org.example.entityH.*;
 import org.hibernate.SessionFactory;
 import org.hibernate.boot.Metadata;
 import org.hibernate.boot.MetadataSources;
@@ -34,6 +32,8 @@ public class GetSessionFactory {
         metadataSources.addAnnotatedClass(Student.class);
         metadataSources.addAnnotatedClass(Laptop.class);
         metadataSources.addAnnotatedClass(Address.class);
+        metadataSources.addAnnotatedClass(Employee.class);
+        metadataSources.addAnnotatedClass(Department.class);
         Metadata metadata = metadataSources.buildMetadata();
         return metadata.getSessionFactoryBuilder().build();
     }
