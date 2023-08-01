@@ -1,13 +1,17 @@
 package org.example.entityH;
 
 import jakarta.persistence.*;
+import org.hibernate.annotations.CacheConcurrencyStrategy;
 import org.hibernate.annotations.GenericGenerator;
+import org.hibernate.annotations.Cache;
 
 import java.util.List;
 
 @Entity
 @Table(name = "student")
 @NamedQuery(name = "display2", query = "from Student where sId=?1")
+@Cacheable
+@Cache(usage= CacheConcurrencyStrategy.READ_ONLY,region = "student")
 public class Student {
     @Id
     @GeneratedValue(generator = "sid")

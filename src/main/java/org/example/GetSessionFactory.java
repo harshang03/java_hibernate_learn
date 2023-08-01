@@ -26,10 +26,10 @@ public class GetSessionFactory {
         settings.put("hibernate.current_session_context_class", "thread");
         settings.put("hibernate.show_sql", "true");
         settings.put("hibernate.hbm2ddl.auto", "update");
+        settings.put("cache.region.factory_class", "org.hibernate.cache.ehcache.internal.EhcacheRegionFactory");
+        settings.put("cache.use_second_level_cache", "true");
         //settings.put("hibernate.format_sql", "true");
-
         ServiceRegistry serviceRegistry = new StandardServiceRegistryBuilder().applySettings(settings).build();
-
         MetadataSources metadataSources = new MetadataSources(serviceRegistry);
         metadataSources.addAnnotatedClass(Student.class);
         metadataSources.addAnnotatedClass(Laptop.class);

@@ -1,14 +1,10 @@
 package org.example;
 
-import org.example.entityH.Address;
-import org.example.entityH.Laptop;
 import org.example.entityH.Student;
 import org.hibernate.Session;
-import org.hibernate.Transaction;
 
 
 import java.util.List;
-import java.util.Objects;
 
 
 public class Main {
@@ -45,6 +41,7 @@ public class Main {
             session.close();*/
             main.displayData();
         } catch (Exception e) {
+            System.out.println("in exception main");
             e.printStackTrace();
         }
     }
@@ -67,7 +64,7 @@ public class Main {
             }
             //first level cach
             Student s = session.get(Student.class, 7);
-            System.out.println("From first level cache:" + " id: " + s.getsId() + " name: ");
+            System.out.println("From first level cache:" + " id: " + s.getsId() + " name: "+s.getsName());
 
             //fetch type eager
             System.out.println("Fetch type eager:" + " id: " + s.getsId() + " name: " + s.getsName() + " Laptop name: " + s.getLaptop().getLaptopName());
@@ -83,5 +80,10 @@ public class Main {
             System.out.println("Session is not opened!");
         }
         session.close();
+        Session session1 = GetSessionFactory.getSession().openSession();
+        System.out.println("in new session..");
+        Student s = session1.get(Student.class, 7);
+        System.out.println("using second level caching:" + " id: " + s.getsId() + " name: "+s.getsName());
+        session1.close();
     }
 }
